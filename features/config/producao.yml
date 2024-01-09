@@ -1,0 +1,6 @@
+aplicacao1:
+  url: https://serverest.dev/
+  username: admin
+  password: 77777
+  headers: {"Content-Type": "application/json"}
+  timeout: 20
