@@ -8,11 +8,10 @@ Dado('API1_Login_POST - realizo o login') do
       STATUS CODE: #{@response.code}
     }
     expect(@response.code).to eql(200)
-    expect(@response["message"]).not_to be(nil)
-    expect(@response["authorization"]).not_to be(nil)
+    expect(@response["message"]).not_to eql(nil)
+    expect(@response["authorization"]).not_to eql(nil)
     @response_login_authorization = @response["authorization"]
 
-    sleep 1
     log %{
       RESPONSE: #{@response.parsed_response}
     }

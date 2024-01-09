@@ -12,9 +12,7 @@ class UsuariosPayload
 
         # POST
 
-            def create_post_usuarios_body(table)
-                self.tabela_gherkin = table
-
+            def create_post_usuarios_body()
                 if self.body == nil
                     self.body = JSON.parse(post_usuarios_body)
                 end
@@ -26,11 +24,20 @@ class UsuariosPayload
 
         # END
 
+        # PUT
+
+            def create_put_usuarios_body()
+                self.body = JSON.parse(post_usuarios_body)
+            end
+        
+        # END
+
     # END
 
 
+    def edit_post_usuarios_body_by_table(table)
+        self.tabela_gherkin = table
 
-    def edit_post_usuarios_body_by_table()
         self.tabela_gherkin.each do |chave, valor|
 
         case chave
@@ -132,7 +139,7 @@ class UsuariosPayload
         end
 
         def update_administrador(administrador)
-            self.body["nome"] = administrador
+            self.body["administrador"] = administrador
         end
 
     # END

@@ -22,4 +22,9 @@ class UsuariosRequest
         self.class.put(url_path, @options.merge!({:body => body}))
     end
 
+    def get_usuarios_by_id(usuario_id)
+        url_path = "/usuarios/#{usuario_id}"
+        self.class.get(url_path)
+    end
+
 end

@@ -1,31 +1,33 @@
 Dado('API1_Usuarios_POST - cadastro um novo usuario - conforme a tabela') do |table|
   table = formatarRegexDaTabela(table.hashes[0])
-  @usuarios_payload.create_post_usuarios_body(table)
+  @cadastro_tabela = table
+
+  @usuarios_payload.create_post_usuarios_body()
+  @usuarios_payload.edit_post_usuarios_body_by_table(table)
   @request_body = @usuarios_payload.body
 
   @response = usuarios_request.post_usuarios(@request_body.to_json)
   log %{
     STATUS CODE: #{@response.code}
   }
-  @response_parsed = @response.parsed_response  
+  @response_post_usuarios = @response.parsed_response  
 
   expect(@response.code).to eql(201)
-  expect(@response_parsed["message"]).to be("Cadastro realizado com sucesso")
-  expect(@response_parsed["_id"]).not_to be(nil)
-  @response_usuarios_id = @response_parsed["_id"]
+  expect(@response_post_usuarios["message"]).to eql("Cadastro realizado com sucesso")
+  expect(@response_post_usuarios["_id"]).not_to eql(nil)
 
   log %{
-    RESPONSE: #{@response_parsed}
+    RESPONSE: #{@response_post_usuarios}
   }
 end
 
 
 Dado('API1_Usuarios_GET - pesquiso o usuario pelo Id') do
-  @response = usuarios_request.get_usuarios_by_id(@response_usuarios_id)
+  @response = usuarios_request.get_usuarios_by_id(@response_post_usuarios["_id"])
     log %{
       STATUS CODE: #{@response.code}
     }
-    @response_parsed = @response.parsed_response  
+    @response_get_usuarios_by_id = @response.parsed_response  
 
     expect(@response.code).to eql(200)
     steps %{
@@ -34,7 +36,7 @@ Dado('API1_Usuarios_GET - pesquiso o usuario pelo Id') do
     }
 
     log %{
-      RESPONSE: #{@response_parsed}
+      RESPONSE: #{@response_get_usuarios_by_id}
     }
 end
 
@@ -49,16 +51,16 @@ E('API1_Usuarios - Validar se os dados correspondem a consulta - conforme a tabe
 
     case chave            
       when "nome"
-        expect(@response_parsed["nome"]).to eql(valor)
+        expect(@response_get_usuarios_by_id["nome"]).to eql(valor)
 
       when "email"
-        expect(@response_parsed["email"]).to eql(valor)
+        expect(@response_get_usuarios_by_id["email"]).to eql(valor)
         
       when "password"
-        expect(@response_parsed["password"]).to eql(valor)
+        expect(@response_get_usuarios_by_id["password"]).to eql(valor)
 
       when "administrador"
-          expect(@response_parsed["administrador"]).to eql(valor)
+          expect(@response_get_usuarios_by_id["administrador"]).to eql(valor)
           
       else
         raise "Invalid Parameter!!! -> #{chave}"
@@ -68,22 +70,32 @@ E('API1_Usuarios - Validar se os dados correspondem a consulta - conforme a tabe
 end
 
 
+Dado('API1_Usuarios - Validar se os dados correspondem ao cadastro') do
+  expect(@response_get_usuarios_by_id["nome"]).to eql(@cadastro_tabela["nome"])
+  expect(@response_get_usuarios_by_id["email"]).to eql(@cadastro_tabela["email"])
+  expect(@response_get_usuarios_by_id["password"]).to eql(@cadastro_tabela["password"])
+  expect(@response_get_usuarios_by_id["administrador"]).to eql(@cadastro_tabela["administrador"])
+end
+
+
 Dado('API1_Usuarios_PUT - atualizo um novo usuario - conforme a tabela') do |table|
-  byebug
-  table = formatarRegexDaTabela(tabela.hashes[0])
-  @usuarios_payload.create_put_usuarios_body(table)
+  table = formatarRegexDaTabela(table.hashes[0])
+  @atualiza_tabela = table
+
+  @usuarios_payload.create_put_usuarios_body()
+  @usuarios_payload.edit_post_usuarios_body_by_table(table)
   @request_body = @usuarios_payload.body
 
-  @response = usuarios_request.put_usuarios(@request_body.to_json)
+  @response = usuarios_request.put_usuarios(@request_body.to_json, @response_post_usuarios["_id"])
   log %{
     STATUS CODE: #{@response.code}
   }
+  @response_put_usuarios = @response.parsed_response  
 
   expect(@response.code).to eql(200)
-  expect(@response["message"]).to be("Registro alterado com sucesso")
+  expect(@response_put_usuarios["message"]).to eql("Registro alterado com sucesso")
 
-  sleep 1
   log %{
-    RESPONSE: #{@response.parsed_response}
+    RESPONSE: #{@response_put_usuarios}
   }
 end
