@@ -8,5 +8,5 @@ ci: --format progress
 hml: ENVIRONMENT_TYPE=hml -p default
 prd: ENVIRONMENT_TYPE=prd -p default
 
-ambiente_padrao: hml
+ambiente_padrao: prd
 html_report: --format html --out=relatorio.html

@@ -1,7 +1,8 @@
-Dado('via API1 - realizo um novo login') do
+Dado('API1_Login_POST - realizo o login') do
     @login_payload.create_post_login_body()
     @request_body = @login_payload.body
 
+    byebug
     @response = login_request.post_login(@request_body.to_json)
     log %{
       STATUS CODE: #{@response.code}

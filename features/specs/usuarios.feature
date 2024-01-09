@@ -11,13 +11,13 @@
             #     * path: "/usuarios"
             #     * descrição: Criar um novo usuario
             @smoke_testing
-            Esquema do Cenário: Criar um novo usuário
-            Dado via API1 - realizo um novo login
-            E via API1 - cadastro um novo usuario - conforme a tabela
+            Cenário: Criar um novo usuário
+            Dado API1_Login_POST - realizo o login
+            E API1_Usuarios_POST - cadastro um novo usuario - conforme a tabela
             | nome           | email                  | password | administrador |
             | "Caio Marques" | "caio.teste@email.com" | "123456" | "true"        |
-            E via API1 - pesquiso o usuario pelo Id
-            E via API1 - VALIDAR - os dados correspondem a consulta - conforme a tabela
+            E API1_Usuarios_GET - pesquiso o usuario pelo Id
+            E API1_Usuarios - Validar se os dados correspondem a consulta - conforme a tabela
             | nome           | email                  | password | administrador |
             | "Caio Marques" | "caio.teste@email.com" | "123456" | "true"        |
 
@@ -26,19 +26,19 @@
             #     * path: "/usuarios"
             #     * descrição: "Atualizar"(deveria ser patch) um usuario
             @smoke_testing
-            Esquema do Cenário: Atualizar um usuário
-            Dado via API1 - realizo um novo login
-            E via API1 - cadastro um novo usuario - conforme a tabela
+            Cenário: Atualizar um usuário
+            Dado API1_Login_POST - realizo o login
+            E API1_Usuarios_POST - cadastro um novo usuario - conforme a tabela
             | nome           | email                  | password | administrador |
             | "Caio Marques" | "caio.teste@email.com" | "123456" | "true"        |
-            E via API1 - pesquiso o usuario pelo Id
-            E via API1 - VALIDAR - os dados correspondem a consulta - conforme a tabela
+            E API1_Usuarios_GET - pesquiso o usuario pelo Id
+            E API1_Usuarios - Validar se os dados correspondem a consulta - conforme a tabela
             | nome           | email                  | password | administrador |
             | "Caio Marques" | "caio.teste@email.com" | "123456" | "true"        |
-            E via API1 - atualizo um novo usuario - conforme a tabela
+            E API1_Usuarios_PUT - atualizo um novo usuario - conforme a tabela
             | nome        | email                 | password  | administrador |
             | "Testador1" | "testador1@email.com" | "1234567" | "false"       |
-            E via API1 - pesquiso o usuario pelo Id
-            E via API1 - VALIDAR - os dados correspondem a consulta - conforme a tabela
+            E API1_Usuarios_GET - pesquiso o usuario pelo Id
+            E API1_Usuarios - Validar se os dados correspondem a consulta - conforme a tabela
             | nome        | email                 | password  | administrador |
             | "Testador1" | "testador1@email.com" | "1234567" | "false"       |

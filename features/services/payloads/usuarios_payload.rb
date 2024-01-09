@@ -12,8 +12,8 @@ class UsuariosPayload
 
         # POST
 
-            def create_post_usuarios_body(tabela)
-                self.tabela_gherkin = tabela
+            def create_post_usuarios_body(table)
+                self.tabela_gherkin = table
 
                 if self.body == nil
                     self.body = JSON.parse(post_usuarios_body)
