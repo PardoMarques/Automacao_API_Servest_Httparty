@@ -9,7 +9,7 @@ Dado('API1_Usuarios_POST - cadastro um novo usuario - conforme a tabela') do |ta
   }
   @response_parsed = @response.parsed_response  
 
-  expect(@response.code).to eql(200)
+  expect(@response.code).to eql(201)
   expect(@response_parsed["message"]).to be("Cadastro realizado com sucesso")
   expect(@response_parsed["_id"]).not_to be(nil)
   @response_usuarios_id = @response_parsed["_id"]
@@ -18,6 +18,7 @@ Dado('API1_Usuarios_POST - cadastro um novo usuario - conforme a tabela') do |ta
     RESPONSE: #{@response_parsed}
   }
 end
+
 
 Dado('API1_Usuarios_GET - pesquiso o usuario pelo Id') do
   @response = usuarios_request.get_usuarios_by_id(@response_usuarios_id)
@@ -36,7 +37,8 @@ Dado('API1_Usuarios_GET - pesquiso o usuario pelo Id') do
       RESPONSE: #{@response_parsed}
     }
 end
- 
+
+
 E('API1_Usuarios - Validar se os dados correspondem a consulta - conforme a tabela') do |table|
   table = formatarRegexDaTabela(table.hashes[0])
 

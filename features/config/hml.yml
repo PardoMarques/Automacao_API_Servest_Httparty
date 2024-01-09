@@ -1,5 +1,5 @@
 aplicacao1:
-  url: http://localhost:8080/
+  url: http://localhost:3000/
   username: admin
   password: 77777
   headers: { "Content-Type": "application/json" }

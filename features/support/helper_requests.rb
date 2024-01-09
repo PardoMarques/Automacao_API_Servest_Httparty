@@ -6,8 +6,8 @@ module HelperRequests
     @login_request ||= LoginRequest::new
   end
 
-  def usuario_request
-    @usuario_request ||= UsuariosRequest::new
+  def usuarios_request
+    @usuarios_request ||= UsuariosRequest::new
   end
 
 end
