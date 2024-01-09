@@ -1,4 +1,4 @@
-require './features/services/models/.*'
+Dir[File.join(File.dirname(__FILE__), "/features/services/models/*_body.rb")].each{|file| require file}
 
 class LoginPayload
     attr_accessor :body

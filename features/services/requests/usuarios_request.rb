@@ -1,4 +1,4 @@
-class LoginRequest
+class UsuariosRequest
     include HTTParty
     base_uri CONFIG["aplicacao1"]["url"]
 

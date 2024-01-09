@@ -60,6 +60,7 @@ GEM
     parallel_tests (4.3.0)
       parallel
     public_suffix (5.0.4)
+    require_all (3.0.0)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
       rspec-expectations (~> 3.12.0)
@@ -89,6 +90,7 @@ DEPENDENCIES
   json (= 2.6.3)
   json-schema (= 4.1.1)
   parallel_tests (= 4.3.0)
+  require_all
   rspec (= 3.12.0)
 
 BUNDLED WITH
