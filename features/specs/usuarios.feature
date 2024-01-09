@@ -32,9 +32,7 @@
             E API1_Usuarios_GET - pesquiso o usuario pelo Id
             E API1_Usuarios - Validar se os dados correspondem ao cadastro
             E API1_Usuarios_PUT - atualizo um novo usuario - conforme a tabela
-            | nome        | email                 | password  | administrador |
-            | "Testador1" | "testador1@email.com" | "1234567" | "false"       |
-            E API1_Usuarios_GET - pesquiso o usuario pelo Id
-            E API1_Usuarios - Validar se os dados correspondem a consulta - conforme a tabela
-            | nome        | email                 | password  | administrador |
-            | "Testador1" | "testador1@email.com" | "1234567" | "false"       |
+            | nome          | email          | password     | administrador |
+            | "random_name" | "random_email" | "random_num" | "true"        |
+E API1_Usuarios_GET - pesquiso o usuario pelo Id
+E API1_Usuarios - Validar se os dados correspondem a atualização

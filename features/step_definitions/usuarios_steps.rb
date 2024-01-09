@@ -80,7 +80,7 @@ end
 
 Dado('API1_Usuarios_PUT - atualizo um novo usuario - conforme a tabela') do |table|
   table = formatarRegexDaTabela(table.hashes[0])
-  @atualiza_tabela = table
+  @atualizacao_tabela = table
 
   @usuarios_payload.create_put_usuarios_body()
   @usuarios_payload.edit_post_usuarios_body_by_table(table)
@@ -90,6 +90,7 @@ Dado('API1_Usuarios_PUT - atualizo um novo usuario - conforme a tabela') do |tab
   log %{
     STATUS CODE: #{@response.code}
   }
+  
   @response_put_usuarios = @response.parsed_response  
 
   expect(@response.code).to eql(200)
@@ -98,4 +99,12 @@ Dado('API1_Usuarios_PUT - atualizo um novo usuario - conforme a tabela') do |tab
   log %{
     RESPONSE: #{@response_put_usuarios}
   }
+end
+
+
+Dado('API1_Usuarios - Validar se os dados correspondem a atualização') do
+  expect(@response_get_usuarios_by_id["nome"]).to eql(@atualizacao_tabela["nome"])
+  expect(@response_get_usuarios_by_id["email"]).to eql(@atualizacao_tabela["email"])
+  expect(@response_get_usuarios_by_id["password"]).to eql(@atualizacao_tabela["password"])
+  expect(@response_get_usuarios_by_id["administrador"]).to eql(@atualizacao_tabela["administrador"])
 end
